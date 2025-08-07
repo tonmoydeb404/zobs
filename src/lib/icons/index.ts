@@ -1,7 +1,11 @@
-import { MoonStar, Sun } from 'lucide-react-native';
+import { Bell, Bookmark, BriefcaseBusiness, Cog, Home, User } from 'lucide-react-native';
 import { iconWithClassName } from './with-classname';
 
-iconWithClassName(Sun);
-iconWithClassName(MoonStar);
+iconWithClassName(Home);
+iconWithClassName(Cog);
+iconWithClassName(BriefcaseBusiness);
+iconWithClassName(User);
+iconWithClassName(Bell);
+iconWithClassName(Bookmark);
 
-export { MoonStar, Sun };
+export { Bell, Bookmark, BriefcaseBusiness, Cog, Home, User };

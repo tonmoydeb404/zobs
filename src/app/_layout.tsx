@@ -1,7 +1,14 @@
 import '~/global.css';
 
+import {
+  DMSans_400Regular,
+  DMSans_500Medium,
+  DMSans_600SemiBold,
+  DMSans_700Bold,
+  useFonts,
+} from '@expo-google-fonts/dm-sans';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
+import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform } from 'react-native';
@@ -17,6 +24,8 @@ const DARK_THEME: Theme = {
   colors: NAV_THEME.dark,
 };
 
+SplashScreen.preventAutoHideAsync();
+
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -26,6 +35,19 @@ export default function RootLayout() {
   const hasMounted = React.useRef(false);
   const { isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
+
+  const [loaded, error] = useFonts({
+    DMSans_400Regular,
+    DMSans_700Bold,
+    DMSans_600SemiBold,
+    DMSans_500Medium,
+  });
+
+  React.useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [error, loaded]);
 
   useIsomorphicLayoutEffect(() => {
     if (hasMounted.current) {
@@ -40,6 +62,10 @@ export default function RootLayout() {
     hasMounted.current = true;
   }, []);
 
+  if (!loaded && !error) {
+    return null;
+  }
+
   if (!isColorSchemeLoaded) {
     return null;
   }
@@ -47,7 +73,9 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Stack />
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
     </ThemeProvider>
   );
 }

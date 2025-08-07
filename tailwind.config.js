@@ -7,6 +7,12 @@ module.exports = {
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['DMSans_400Regular'],
+        sans_bold: ['DMSans_700Bold'],
+        sans_semibold: ['DMSans_600SemiBold'],
+        sans_medium: ['DMSans_500Medium'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
