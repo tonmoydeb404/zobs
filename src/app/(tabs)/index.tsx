@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '~/components/ui/card';
 import { Text } from '~/components/ui/text';
-import { Bookmark, Cog } from '~/lib/icons';
+import { Bookmark, BriefcaseBusiness, Cog } from '~/lib/icons';
 
 export default function Tab() {
   return (
@@ -21,6 +21,7 @@ export default function Tab() {
       </View>
       <View className="mb-10 h-48 flex-row gap-4 px-6">
         <View className="flex-grow items-center justify-center rounded-xl bg-[#AFECFE] text-center">
+          <BriefcaseBusiness className="mb-3" size={34} />
           <Text className="font-sans_bold text-xl">44.5k</Text>
           <Text className="text-sm">Remote Job</Text>
         </View>
