@@ -17,7 +17,7 @@ function Text({
   const Component = asChild ? Slot.Text : RNText;
   return (
     <Component
-      className={cn('text-base text-foreground web:select-text', textClass, className)}
+      className={cn('font-sans text-base text-foreground web:select-text', textClass, className)}
       {...props}
     />
   );

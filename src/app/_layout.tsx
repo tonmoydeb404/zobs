@@ -12,6 +12,7 @@ import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform } from 'react-native';
+import 'react-native-reanimated';
 import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/use-color-scheme';
 
@@ -75,6 +76,15 @@ export default function RootLayout() {
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="jobs/[id]"
+          options={{
+            presentation: 'containedModal',
+            headerShown: false,
+            animation: 'slide_from_bottom',
+            animationMatchesGesture: true,
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

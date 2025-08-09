@@ -1,4 +1,5 @@
-import { View } from 'react-native';
+import { useRouter } from 'expo-router';
+import { TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '~/components/ui/card';
@@ -6,6 +7,7 @@ import { Text } from '~/components/ui/text';
 import { Bookmark, BriefcaseBusiness, Cog } from '~/lib/icons';
 
 export default function Tab() {
+  const router = useRouter();
   return (
     <SafeAreaView>
       <View className="mb-10 mt-16 px-6">
@@ -41,35 +43,39 @@ export default function Tab() {
         <Text className="font-sans_bold text-base">Recent Job List</Text>
       </View>
       <View className="px-6">
-        <Card className="rounded-[20px] shadow-none">
-          <CardHeader className="flex-row items-start gap-2.5 p-5">
-            <View className="size-10 items-center justify-center rounded-full bg-[#D6CDFE]">
-              <Cog size={18} />
-            </View>
-            <View className="mr-auto">
-              <Text className="font-sans_bold mb-1 text-sm">Product Designer</Text>
-              <View className="flex-row items-center gap-x-[5px]">
-                <Text className="text-xs">Google inc</Text>
-                <View className="size-0.5 rounded-full bg-black" />
-                <Text className="text-xs">California, USA</Text>
+        <TouchableOpacity onPress={() => router.push('/jobs/hello')}>
+          <Card className="rounded-[20px] shadow-none">
+            <CardHeader className="flex-row items-start gap-2.5 p-5">
+              <View className="size-10 items-center justify-center rounded-full bg-[#D6CDFE]">
+                <Cog size={18} />
               </View>
-            </View>
-            <Button size={'icon'} variant={'ghost'}>
-              <Bookmark size={18} />
-            </Button>
-          </CardHeader>
-          <CardContent className="pb-2.5">
-            <Text className="font-sans_semibold text-sm">
-              $15K<Text className="font-sans text-xs text-muted-foreground">/Mo</Text>
-            </Text>
-          </CardContent>
-          <CardFooter className="gap-x-2 pb-5">
-            <Text className="rounded-lg bg-muted px-3 py-1 text-xs text-[#524B6B]">
-              Senior designer
-            </Text>
-            <Text className="rounded-lg bg-muted px-3 py-1 text-xs text-[#524B6B]">Full time</Text>
-          </CardFooter>
-        </Card>
+              <View className="mr-auto">
+                <Text className="mb-1 font-sans_bold text-sm">Product Designer</Text>
+                <View className="flex-row items-center gap-x-[5px]">
+                  <Text className="text-xs">Google inc</Text>
+                  <View className="size-0.5 rounded-full bg-black" />
+                  <Text className="text-xs">California, USA</Text>
+                </View>
+              </View>
+              <Button size={'icon'} variant={'ghost'}>
+                <Bookmark size={18} />
+              </Button>
+            </CardHeader>
+            <CardContent className="pb-2.5">
+              <Text className="font-sans_semibold text-sm">
+                $15K<Text className="font-sans text-xs text-muted-foreground">/Mo</Text>
+              </Text>
+            </CardContent>
+            <CardFooter className="gap-x-2 pb-5">
+              <Text className="rounded-lg bg-muted px-3 py-1 text-xs text-[#524B6B]">
+                Senior designer
+              </Text>
+              <Text className="rounded-lg bg-muted px-3 py-1 text-xs text-[#524B6B]">
+                Full time
+              </Text>
+            </CardFooter>
+          </Card>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
