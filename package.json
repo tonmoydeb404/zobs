@@ -9,13 +9,12 @@
     "prebuild": "expo prebuild",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:local": "eas build --platform android --profile local --local"
   },
   "dependencies": {
     "@clerk/clerk-expo": "^2.14.16",
     "@expo-google-fonts/dm-sans": "^0.4.1",
-    "@expo/vector-icons": "^14.0.0",
-    "@gorhom/bottom-sheet": "^5.1.8",
     "@react-navigation/native": "^7.0.3",
     "@rn-primitives/label": "^1.2.0",
     "@rn-primitives/slot": "^1.2.0",
