@@ -4,6 +4,7 @@ import {
   Bookmark,
   Briefcase,
   BriefcaseBusiness,
+  CheckCheck,
   Cog,
   Home,
   MapPin,
@@ -26,6 +27,7 @@ iconWithClassName(ArrowLeft);
 iconWithClassName(Search);
 iconWithClassName(MapPin);
 iconWithClassName(MessageCircle);
+iconWithClassName(CheckCheck);
 
 export const Icons = {
   Setting: Cog,
@@ -41,6 +43,7 @@ export const Icons = {
   Location: MapPin,
   Briefcase: Briefcase,
   MessageCircle: MessageCircle,
+  Read: CheckCheck,
 };
 
 export { Bell, Bookmark, BriefcaseBusiness, Cog, Home, User, X };

@@ -1,5 +1,6 @@
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Button } from '~/components/ui/button';
 import { Card } from '~/components/ui/card';
 import { Text } from '~/components/ui/text';
 import { Icons } from '~/lib/icons';
@@ -58,23 +59,16 @@ const mockNotifications: Notification[] = [
 ];
 
 export default function NotificationsTab() {
-  const getNotificationIcon = (type: Notification['type']) => {
-    switch (type) {
-      case 'job_alert':
-        return <Icons.Briefcase className="text-blue-500" size={24} />;
-      case 'message':
-        return <Icons.MessageCircle className="text-green-500" size={24} />;
-      case 'update':
-        return <Icons.Bell className="text-orange-500" size={24} />;
-    }
-  };
-
   return (
     <SafeAreaView className="flex-1">
-      <View className="items-center justify-center px-5 py-11">
+      <View className="flex-row justify-between px-5 py-11">
         <View className="flex-row items-center justify-between">
           <Text className="text-2xl font-bold text-gray-900">Notifications</Text>
         </View>
+
+        <Button size={'icon'} variant={'secondary'} className="rounded-full">
+          <Icons.Read size={18} />
+        </Button>
       </View>
 
       <FlatList
