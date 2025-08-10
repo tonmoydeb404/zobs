@@ -1,68 +1,97 @@
+import { useState } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import JobCard from '~/components/cards/job-card';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Text } from '~/components/ui/text';
 import { Icons } from '~/lib/icons';
 
-type Props = {};
-
 const tags = ['Senior designer', 'Designer', 'Full-time', 'Part-time'];
 
-const JobsTab = (props: Props) => {
+const JobsTab = () => {
+  const insets = useSafeAreaInsets();
+  const top = useSharedValue(0);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  const headerStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: top.value }],
+  }));
+
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View className="mb-5 rounded-b-3xl border-x border-b border-border bg-white px-5 py-8">
-          <View className="mb-5">
-            <Button size={'icon'} variant={'ghost'}>
-              <Icons.Back />
-            </Button>
+    <View className="flex-1 bg-white" style={{ paddingTop: insets.top }}>
+      <FlatList
+        data={[
+          { key: 'Devin' },
+          { key: 'Dan' },
+          { key: 'Dominic' },
+          { key: 'Jackson' },
+          { key: 'James' },
+          { key: 'Joel' },
+          { key: 'John' },
+          { key: 'Jillian' },
+          { key: 'Jimmy' },
+          { key: 'Julie' },
+        ]}
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={10}
+        onScroll={(e) => {
+          const y = e.nativeEvent.contentOffset.y;
+          const clampedY = Math.min(y, headerHeight);
+          top.value = withTiming(-clampedY, {
+            duration: 100,
+            easing: Easing.out(Easing.quad),
+          });
+        }}
+        contentContainerStyle={{
+          paddingTop: headerHeight + 16,
+          paddingBottom: insets.bottom + 16,
+          paddingHorizontal: 20,
+        }}
+        renderItem={() => (
+          <View className="mb-3.5">
+            <JobCard />
           </View>
-          <View>
-            <View className="relative mb-3">
-              <Icons.Search
-                className="absolute left-3 top-2.5 z-50 text-muted-foreground"
-                size={22}
-              />
-              <Input className="pl-12" placeholder="Design" />
+        )}
+      />
+
+      <View className="absolute left-0 right-0" style={{ top: insets.top }}>
+        <View className="relative">
+          <Animated.View
+            onLayout={(e) => setHeaderHeight(e.nativeEvent.layout.height)}
+            style={[{ position: 'absolute', left: 0, right: 0 }, headerStyle]}>
+            <View className="mb-5 rounded-b-3xl border-x border-b border-border bg-white px-5 py-8">
+              <View>
+                <View className="relative mb-3">
+                  <Icons.Search
+                    className="absolute left-3 top-2.5 z-50 text-muted-foreground"
+                    size={22}
+                  />
+                  <Input className="pl-12" placeholder="Design" />
+                </View>
+                <View className="relative">
+                  <Icons.Location
+                    className="absolute left-3 top-2.5 z-50 text-[#FCA34D]"
+                    size={22}
+                  />
+                  <Input className="pl-12" placeholder="California, USA" />
+                </View>
+              </View>
             </View>
-            <View className="relative">
-              <Icons.Location className="absolute left-3 top-2.5 z-50 text-[#FCA34D]" size={22} />
-              <Input className="pl-12" placeholder="California, USA" />
-            </View>
-          </View>
+            <ScrollView horizontal className="mb-5 ml-5">
+              {tags.map((tag, index) => (
+                <Button key={index} className="mr-2" variant={'secondary'}>
+                  <Text>{tag}</Text>
+                </Button>
+              ))}
+            </ScrollView>
+          </Animated.View>
         </View>
-        <ScrollView horizontal className="mb-5 ml-5">
-          {tags.map((tag, index) => (
-            <Button key={index} className="mr-2" variant={'secondary'}>
-              <Text>{tag}</Text>
-            </Button>
-          ))}
-        </ScrollView>
-        <FlatList
-          data={[
-            { key: 'Devin' },
-            { key: 'Dan' },
-            { key: 'Dominic' },
-            { key: 'Jackson' },
-            { key: 'James' },
-            { key: 'Joel' },
-            { key: 'John' },
-            { key: 'Jillian' },
-            { key: 'Jimmy' },
-            { key: 'Julie' },
-          ]}
-          renderItem={({ item }) => (
-            <View className="mb-3.5">
-              <JobCard />
-            </View>
-          )}
-          className="px-5"
-        />
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+
+      <View className="absolute left-0 right-0 top-0 bg-white" style={{ height: insets.top }} />
+    </View>
   );
 };
 
