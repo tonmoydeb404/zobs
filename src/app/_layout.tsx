@@ -1,5 +1,7 @@
 import '~/global.css';
 
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import {
   DMSans_400Regular,
   DMSans_500Medium,
@@ -74,18 +76,21 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="jobs/[id]"
-          options={{
-            presentation: 'containedModal',
-            headerShown: false,
-            animation: 'slide_from_bottom',
-            animationMatchesGesture: true,
-          }}
-        />
-      </Stack>
+      <ClerkProvider tokenCache={tokenCache}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="jobs/[id]"
+            options={{
+              presentation: 'containedModal',
+              headerShown: false,
+              animation: 'slide_from_bottom',
+              animationMatchesGesture: true,
+            }}
+          />
+        </Stack>
+      </ClerkProvider>
     </ThemeProvider>
   );
 }

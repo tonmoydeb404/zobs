@@ -1,4 +1,5 @@
-import { Tabs } from 'expo-router';
+import { useAuth } from '@clerk/clerk-expo';
+import { Redirect, Tabs } from 'expo-router';
 import { Bell, BriefcaseBusiness, Home, User } from '~/lib/icons';
 
 const screens = [
@@ -9,6 +10,12 @@ const screens = [
 ];
 
 export default function TabLayout() {
+  const { isSignedIn } = useAuth();
+
+  if (!isSignedIn) {
+    return <Redirect href="/sign-in" />;
+  }
+
   return (
     <Tabs
       screenOptions={{

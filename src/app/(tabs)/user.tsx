@@ -1,3 +1,4 @@
+import { useAuth } from '@clerk/clerk-expo';
 import { useState } from 'react';
 import { Image, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,8 +9,22 @@ import { Text } from '~/components/ui/text';
 import { Icons } from '~/lib/icons';
 
 const UserScreen = () => {
+  const { signOut } = useAuth();
   const [pushNotifications, setPushNotifications] = useState(true);
   const [emailNotifications, setEmailNotifications] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await signOut();
+      // Navigation to auth screen will be handled automatically by the auth guard
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1">
@@ -75,9 +90,16 @@ const UserScreen = () => {
               <Icons.ChevronRight className="ml-auto" size={16} />
             </Button>
 
-            <Button className="flex-row gap-x-2 rounded-xl" variant={'outline'}>
+            <Button 
+              className="flex-row gap-x-2 rounded-xl" 
+              variant={'outline'}
+              onPress={handleLogout}
+              disabled={isLoggingOut}
+            >
               <Icons.LogOut size={16} className="text-destructive" />
-              <Text className="text-destructive group-active:text-destructive">Logout</Text>
+              <Text className="text-destructive group-active:text-destructive">
+                {isLoggingOut ? 'Logging out...' : 'Logout'}
+              </Text>
               <Icons.ChevronRight className="ml-auto" size={16} />
             </Button>
           </View>
