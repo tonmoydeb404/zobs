@@ -2,8 +2,8 @@ import { Tabs } from 'expo-router';
 import { Bell, BriefcaseBusiness, Home, User } from '~/lib/icons';
 
 const screens = [
-  { label: 'Home', icon: Home, name: 'index' },
   { label: 'Jobs', icon: BriefcaseBusiness, name: 'jobs' },
+  { label: 'Home', icon: Home, name: 'index' },
   { label: 'Notifications', icon: Bell, name: 'notifications' },
   { label: 'User', icon: User, name: 'user' },
 ];
