@@ -28,7 +28,7 @@ const UserScreen = () => {
             </View>
 
             {/* Name */}
-            <Text className="mb-2 text-2xl font-bold text-gray-900">John Doe</Text>
+            <Text className="mb-1 font-sans_bold text-2xl text-gray-900">John Doe</Text>
 
             {/* Address */}
             <View className="flex-row items-center">

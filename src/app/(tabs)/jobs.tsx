@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import JobCard from '~/components/cards/job-card';
 import { Button } from '~/components/ui/button';
@@ -63,6 +68,13 @@ const JobsTab = () => {
             style={[{ position: 'absolute', left: 0, right: 0 }, headerStyle]}>
             <View className="mb-5 rounded-b-3xl border-x border-b border-border bg-white px-5 py-8">
               <View>
+                <View className="mb-8 flex-row justify-between">
+                  <Text className="font-sans_bold text-2xl text-gray-900">Available Jobs</Text>
+
+                  <Button size={'icon'} variant={'secondary'} className="hidden  rounded-full">
+                    <Icons.Read size={18} />
+                  </Button>
+                </View>
                 <View className="relative mb-3">
                   <Icons.Search
                     className="absolute left-3 top-2.5 z-50 text-muted-foreground"

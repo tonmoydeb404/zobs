@@ -61,10 +61,8 @@ const mockNotifications: Notification[] = [
 export default function NotificationsTab() {
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-row justify-between px-5 py-11">
-        <View className="flex-row items-center justify-between">
-          <Text className="text-2xl font-bold text-gray-900">Notifications</Text>
-        </View>
+      <View className="mt-6 flex-row justify-between px-5 py-5">
+        <Text className="font-sans_bold text-2xl text-gray-900">Notifications</Text>
 
         <Button size={'icon'} variant={'secondary'} className="rounded-full">
           <Icons.Read size={18} />
@@ -75,7 +73,7 @@ export default function NotificationsTab() {
         data={mockNotifications}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
-        contentContainerClassName="px-5 gap-y-3 pb-10"
+        contentContainerClassName="px-5 gap-y-3 py-10"
         renderItem={({ item }) => (
           <TouchableOpacity>
             <Card className="flex-row gap-x-4 rounded-2xl p-4">
